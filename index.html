@@ -168,9 +168,11 @@ button[type="submit"]:hover {
 
     <script>
 document.querySelector(".role-form").addEventListener("submit", function(event) {
-    event.preventDefault(); // Prevent real submission for demo
+    event.preventDefault(); // Prevent default first
 
-    // Create popup container
+    const form = event.target;
+
+    // Show popup
     const popup = document.createElement("div");
     popup.textContent = "✔ Form submitted successfully!";
     Object.assign(popup.style, {
@@ -188,21 +190,17 @@ document.querySelector(".role-form").addEventListener("submit", function(event) 
         opacity: "0",
         transition: "opacity 0.4s ease"
     });
-
     document.body.appendChild(popup);
-
-    // Smooth fade-in
     setTimeout(() => popup.style.opacity = "1", 100);
-
-    // Remove popup after 3 seconds
     setTimeout(() => {
         popup.style.opacity = "0";
         setTimeout(() => popup.remove(), 400);
     }, 3000);
 
-    // Optional: Reset form after submission
-    event.target.reset();
+    // Actually submit the form after showing popup
+    setTimeout(() => form.submit(), 500); // submit after 0.5 sec
 });
+
 </script>
 
 
